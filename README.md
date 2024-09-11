@@ -9,3 +9,6 @@ Prueba tecnica con Python, PHP, MySQL
 
 ### Archivo Gitignore
 Se agrega un archivo gitignore que sea capaz mantener el repositorio limpio de las opciones que se agreguen el entorno virtual y demas compilaciones
+
+### Archivo Requirements
+El archivo requirements.txt tiene como objetivo listar todas las librerias usadas en el entorno virtual que se usa de forma local
