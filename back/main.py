@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.database import pedidos_all,pedidos_cabecera
+from src.database import pedidos_all
 from fastapi.encoders import jsonable_encoder
 app = FastAPI()
 
 origins = ['*']
-
+# Se agregan cabeceras para el envio cruzados de datos 'CORS'
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -18,6 +18,7 @@ app.add_middleware(
 def read_root():
     return {"Hello": "World"}
 
+#Endpoint que envia todos los campos de la tabla tb_pedidos eliminados como un json
 @app.get("/items/")
 async def leer_items():
     json_items  = jsonable_encoder(pedidos_all)
