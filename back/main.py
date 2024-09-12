@@ -1,7 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.database import pedidos_all
+from src.database import pedidos_all, pedidos_cabecera
 from fastapi.encoders import jsonable_encoder
+from fastapi.responses import FileResponse
+from src.data_to_excel import convert_to_df, save_to_excel
+
 app = FastAPI()
 
 origins = ['*']
@@ -23,3 +26,9 @@ def read_root():
 async def leer_items():
     json_items  = jsonable_encoder(pedidos_all)
     return json_items
+
+@app.get('/download-excel')
+def download_excel():
+    df = convert_to_df(pedidos_all,pedidos_cabecera)
+    file_path = save_to_excel(df)
+    return FileResponse(path=file_path, filename="pedidos_eliminados.xlsx", media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
