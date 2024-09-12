@@ -1,4 +1,4 @@
-const URL = 'http://127.0.0.1:8000/items/'
+const URL = 'http://127.0.0.1:8000/'
 
 let app = document.querySelector('#app')
 
@@ -7,14 +7,15 @@ let thead = document.createElement('thead')
 let tr = document.createElement('tr')
 let tbody = document.createElement('tbody')
 
-
-let items = fetch(URL, {
+const opt_headers = {
     method:'GET',
     mode:'cors',
     headers:{
         'Access-Control-Allow-Origin':"*"
     }
-}).then((res)=>{
+}
+
+let items = fetch(`${URL}items/`, opt_headers).then((res)=>{
     return res.json()
 }).then(data=>{
     let cabeceras = []
@@ -42,3 +43,9 @@ thead.appendChild(tr)
 tabla.appendChild(thead)
 tabla.appendChild(tbody)
 app.appendChild(tabla)
+
+let button = document.getElementById("download")
+button.addEventListener("click", async(event)=>{
+    event.preventDefault()
+    await fetch(`${URL}download-excel/`, opt_headers)
+})

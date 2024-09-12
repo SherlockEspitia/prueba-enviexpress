@@ -1,3 +1,13 @@
+#app>header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    &>#download{
+        max-height: 25px;
+    }
+}
+
 thead{
     background-color: #2c5e77;
     color: #ffd;
